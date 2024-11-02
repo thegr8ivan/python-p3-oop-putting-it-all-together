@@ -1,26 +1,24 @@
-#!/usr/bin/env python3
-
-from shoe import Shoe
-
 import io
 import sys
+import pytest
+from lib.shoe import Shoe  # Adjust the import to match your structure
 
 class TestShoe:
     '''Shoe in shoe.py'''
 
     def test_has_brand_and_size(self):
         '''has the brand and size passed to __init__, and values can be set to new instance.'''
-        stan_smith = Shoe("Adidas", 9,"Leather")
-        assert(stan_smith.brand == "Adidas")
-        assert(stan_smith.size == 9)
-        assert(stan_smith.material == "Leather")
+        stan_smith = Shoe("Adidas", 9, "Leather")
+        assert stan_smith.brand == "Adidas"
+        assert stan_smith.size == 9
+        assert stan_smith.material == "Leather"
 
     def test_requires_int_size(self):
         '''prints "size must be an integer" if size is not an integer.'''
         stan_smith = Shoe("Adidas", 9, "Leather")
         captured_out = io.StringIO()
         sys.stdout = captured_out
-        stan_smith.size = "not an integer"
+        stan_smith.size = "not an integer"  # Trigger the setter
         sys.stdout = sys.__stdout__
         assert captured_out.getvalue() == "size must be an integer\n"
 
@@ -37,7 +35,4 @@ class TestShoe:
         '''creates an attribute on the instance called 'condition' and set equal to 'New' after repair.'''
         stan_smith = Shoe("Adidas", 9, "Leather")
         stan_smith.cobble()
-        assert(stan_smith.condition == "New")
-        
-        
-   
+        assert stan_smith.condition == "New"
