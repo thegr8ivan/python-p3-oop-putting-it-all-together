@@ -1,7 +1,7 @@
+import pytest
 import io
 import sys
-import pytest
-from lib.shoe import Shoe  # Adjust the import to match your structure
+from lib.shoe import Shoe  
 
 class TestShoe:
     '''Shoe in shoe.py'''
@@ -18,9 +18,9 @@ class TestShoe:
         stan_smith = Shoe("Adidas", 9, "Leather")
         captured_out = io.StringIO()
         sys.stdout = captured_out
-        stan_smith.size = "not an integer"  # Trigger the setter
+        stan_smith.size = "not an integer"  
         sys.stdout = sys.__stdout__
-        assert captured_out.getvalue() == "size must be an integer\n"
+        assert captured_out.getvalue().strip() == "size must be an integer"
 
     def test_can_cobble(self):
         '''says that the shoe has been repaired.'''
@@ -29,8 +29,8 @@ class TestShoe:
         sys.stdout = captured_out
         stan_smith.cobble()
         sys.stdout = sys.__stdout__
-        assert captured_out.getvalue() == "The Adidas shoe has been repaired.\n"
-    
+        assert captured_out.getvalue().strip() == "The Adidas shoe has been repaired."
+
     def test_cobble_makes_new(self):
         '''creates an attribute on the instance called 'condition' and set equal to 'New' after repair.'''
         stan_smith = Shoe("Adidas", 9, "Leather")

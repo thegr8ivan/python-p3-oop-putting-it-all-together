@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+import pytest
+from lib.book import Book
+from lib.shoe import Shoe
 
 def pytest_itemcollected(item):
     par = item.parent.obj
